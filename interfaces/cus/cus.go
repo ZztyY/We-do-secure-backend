@@ -4,6 +4,7 @@ import (
 	"We-do-secure/domain/cus/cus_model"
 	"We-do-secure/interfaces/errorcode"
 	"We-do-secure/interfaces/response"
+	"We-do-secure/logger"
 	"We-do-secure/util"
 	"github.com/gin-gonic/gin"
 )
@@ -18,6 +19,8 @@ func EditCus(c *gin.Context) {
 	gender := c.PostForm("gender")
 	marStatus := c.PostForm("mar_status")
 	uId := c.PostForm("uid")
+
+	logger.LogInfo("", uId)
 
 	if fName == "" || lName == "" || street == "" || city == "" || state == "" || zipcode == "" || marStatus == "" || uId == "" {
 		response.SendError(c, errorcode.CODE_PARAMS_INVALID, "missing params", nil)

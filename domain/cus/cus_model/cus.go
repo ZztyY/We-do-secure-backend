@@ -34,11 +34,17 @@ func UpdateCus(cus *Cus) {
 func GetCus(cid uint) *Cus {
 	var cus Cus
 	database.DB.First(&cus, cid)
+	if cus.CID == 0 {
+		return nil
+	}
 	return &cus
 }
 
 func GetCusByUid(uid uint) *Cus {
 	var cus Cus
 	database.DB.Where("uid = ?", uid).First(&cus)
+	if cus.CID == 0 {
+		return nil
+	}
 	return &cus
 }

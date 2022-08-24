@@ -35,6 +35,9 @@ func UpdateHome(home *Home) {
 func GetHome(id uint) *Home {
 	var home Home
 	database.DB.First(&home, id)
+	if home.HID == 0 {
+		return nil
+	}
 	return &home
 }
 
