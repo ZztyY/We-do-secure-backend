@@ -1,6 +1,7 @@
 package main
 
 import (
+	"We-do-secure/domain/cus/cus_model"
 	"We-do-secure/domain/home/home_model"
 	"We-do-secure/domain/user/user_model"
 	"We-do-secure/env"
@@ -50,4 +51,5 @@ func InitMigrate() {
 	// 基础服务
 	user_model.InitMigrate()
 	home_model.InitMigrate()
+	cus_model.InitMigrate()
 }
