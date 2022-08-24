@@ -9,3 +9,5 @@ const CODE_API_TOKEN_FAIL = -3
 // 用户类型的错误
 const CODE_USER_NAME_EXIST = 995      // 手机号已存在
 const CODE_USER_PASSWORD_FORMAT = 997 // 密码格式错误
+const CODE_INSUFFICIENT_INPUT = 999   //缺少输入值
+const CODE_INVALID_INPUT = 1001       //非法输入值

@@ -24,7 +24,7 @@ func SendError(c *gin.Context, code int, message interface{}, data interface{}) 
 }
 
 func SendParamsError(c *gin.Context, data interface{}) {
-	SendError(c, errorcode.CODE_PARAMS_INVALID, "缺少参数", data)
+	SendError(c, errorcode.CODE_PARAMS_INVALID, "missing parameter", data)
 }
 
 func Redirect(c *gin.Context, url string) {
