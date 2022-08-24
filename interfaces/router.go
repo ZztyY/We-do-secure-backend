@@ -3,6 +3,7 @@ package interfaces
 import (
 	"We-do-secure/interfaces/cus"
 	"We-do-secure/interfaces/home"
+	"We-do-secure/interfaces/pol"
 	"We-do-secure/interfaces/user"
 	"We-do-secure/interfaces/vehicle"
 	"github.com/gin-gonic/gin"
@@ -33,4 +34,8 @@ func InitRouter(r *gin.Engine) {
 	group.GET("/driver/get", vehicle.GetDriver)
 	// vehicle related drivers list
 	group.GET("/driver/vehicle/list", vehicle.VehicleDriverList)
+
+	group.GET("/pol/user/list", pol.UserPolList)
+	group.POST("/pol/edit", pol.EditPol)
+	group.GET("/pol/get", pol.GetPol)
 }

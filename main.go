@@ -3,6 +3,7 @@ package main
 import (
 	"We-do-secure/domain/cus/cus_model"
 	"We-do-secure/domain/home/home_model"
+	"We-do-secure/domain/pol/pol_model"
 	"We-do-secure/domain/user/user_model"
 	"We-do-secure/domain/vehicle/vehicle_model"
 	"We-do-secure/env"
@@ -54,4 +55,5 @@ func InitMigrate() {
 	home_model.InitMigrate()
 	cus_model.InitMigrate()
 	vehicle_model.InitMigrate()
+	pol_model.InitMigrate()
 }
