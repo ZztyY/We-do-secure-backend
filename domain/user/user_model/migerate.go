@@ -4,6 +4,6 @@ import "We-do-secure/database"
 
 func InitMigrate() {
 	database.DB.AutoMigrate(
-		&User{},
+		&User{},&Password_His{},
 	)
 }

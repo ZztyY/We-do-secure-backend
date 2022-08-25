@@ -88,8 +88,14 @@ func ResetPassword(c *gin.Context) {
 		response.SendError(c, errorcode.CODE_USER_PASSWORD_FORMAT, "password can not be same as before!", nil)
 		return
 	}
+	ps_h := user_model.Password_His{}
+	ps_h.Old = user.Password
 	user.Password = password
+	ps_h.New = password
+	ps_h.Up_Date = util.JSONDetailTime{Time: time.Now()}
+	ps_h.UID = user.ID
 	user_model.UpdateUser(user)
+	user_model.CreatePassword_His(&ps_h)
 	response.SendSuccess(c, "success")
 }
 
