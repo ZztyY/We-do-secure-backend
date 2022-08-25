@@ -29,6 +29,23 @@ func UserLogin(c *gin.Context) {
 	response.SendSuccess(c, user)
 }
 
+func GetUser(c *gin.Context) {
+	uId := c.DefaultQuery("uid", "")
+	if uId == "" {
+		response.SendError(c, errorcode.CODE_PARAMS_INVALID, "missing params", nil)
+		return
+	}
+
+	if user_model.GetUser(util.StrToUInt(uId)) == nil {
+		response.SendError(c, errorcode.CODE_PARAMS_INVALID, "no such user", nil)
+		return
+	}
+
+	user := user_model.GetUser(util.StrToUInt(uId))
+
+	response.SendSuccess(c, user)
+}
+
 func UserRegister(c *gin.Context) {
 	username := c.PostForm("user_name")
 	password := c.PostForm("password")

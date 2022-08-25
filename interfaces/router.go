@@ -3,6 +3,7 @@ package interfaces
 import (
 	"We-do-secure/interfaces/cus"
 	"We-do-secure/interfaces/home"
+	"We-do-secure/interfaces/invoice"
 	"We-do-secure/interfaces/pol"
 	"We-do-secure/interfaces/user"
 	"We-do-secure/interfaces/vehicle"
@@ -16,6 +17,7 @@ func InitRouter(r *gin.Engine) {
 	group.POST("/register", user.UserRegister)
 	group.GET("/reset/password", user.ResetPassword)
 	group.GET("/user/list", user.UserList)
+	group.GET("/user/get", user.GetUser)
 
 	group.POST("/home/add", home.AddHome)
 	group.GET("/home/list", home.HomeList)
@@ -38,4 +40,9 @@ func InitRouter(r *gin.Engine) {
 	group.GET("/pol/user/list", pol.UserPolList)
 	group.POST("/pol/edit", pol.EditPol)
 	group.GET("/pol/get", pol.GetPol)
+
+	group.GET("/invoice/user/list", invoice.UserInvoiceList)
+	group.GET("/invoice/get", invoice.GetInvoice)
+	group.POST("/user/update/payment", invoice.UpdatePaymentMethod)
+	group.POST("/invoice/make/payment", invoice.MakePayment)
 }

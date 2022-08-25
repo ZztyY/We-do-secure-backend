@@ -2,6 +2,7 @@ package pol
 
 import (
 	"We-do-secure/domain/cus/cus_model"
+	"We-do-secure/domain/invoice/invoice_model"
 	"We-do-secure/domain/pol/pol_model"
 	"We-do-secure/domain/pol/pol_service"
 	"We-do-secure/interfaces/errorcode"
@@ -99,6 +100,13 @@ func EditPol(c *gin.Context) {
 
 		pol_model.CreatePol(&pol)
 
+		invoice := invoice_model.Invoice{}
+		invoice.PID = pol.PID
+		invoice.IDueDate = util.JSONDetailTime{Time: util.StrToTimeTime(sDate).AddDate(0, 1, 0)}
+		invoice.IAmount = pol.PAmount
+
+		invoice_model.CreateInvoice(&invoice)
+
 		if pType == "A" {
 			polVeh := pol_model.PolVeh{}
 			polVeh.VID = util.StrToUInt(vId)
@@ -130,6 +138,20 @@ func EditPol(c *gin.Context) {
 		pol.CID = cus.CID
 
 		pol_model.UpdatePol(pol)
+
+		invoice := invoice_model.GetInvoiceByPId(pol.PID)
+		if invoice == nil {
+			invoice := invoice_model.Invoice{}
+			invoice.IAmount = pol.PAmount
+			invoice.IDueDate = util.JSONDetailTime{Time: util.StrToTimeTime(sDate).AddDate(0, 1, 0)}
+			invoice.PID = pol.PID
+
+			invoice_model.CreateInvoice(&invoice)
+		} else {
+			invoice.IAmount = pol.PAmount
+			invoice.IDueDate = util.JSONDetailTime{Time: util.StrToTimeTime(sDate).AddDate(0, 1, 0)}
+			invoice_model.UpdateInvoice(invoice)
+		}
 		response.SendSuccess(c, pol)
 	}
 }

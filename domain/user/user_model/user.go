@@ -9,6 +9,8 @@ type User struct {
 	ID             uint                `gorm:"primary_key" json:"id"`
 	UserName       string              `gorm:"type:varchar(30);unique" json:"user_name"`
 	Password       string              `gorm:"type:varchar(30)" json:"-"`
+	PMethod        string              `gorm:"type:varchar(6)" json:"p_method"`
+	PAccountNum    string              `gorm:"type:varchar(20)" json:"p_account_num"`
 	Token          string              `gorm:"type:varchar(30)" json:"token"`
 	TokenExpiredAt util.JSONDetailTime `json:"token_expired_at"`
 	CreatedAt      util.JSONTime       `json:"created_at"`
@@ -33,6 +35,9 @@ func UpdateUser(user *User) {
 func GetUser(id uint) *User {
 	var user User
 	database.DB.First(&user, id)
+	if user.ID == 0 {
+		return nil
+	}
 	return &user
 }
 
