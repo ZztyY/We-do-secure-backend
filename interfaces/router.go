@@ -45,4 +45,5 @@ func InitRouter(r *gin.Engine) {
 	group.GET("/invoice/get", invoice.GetInvoice)
 	group.POST("/user/update/payment", invoice.UpdatePaymentMethod)
 	group.POST("/invoice/make/payment", invoice.MakePayment)
+	group.GET("/payment/list", invoice.PaymentList)
 }

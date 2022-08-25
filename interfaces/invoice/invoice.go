@@ -144,3 +144,18 @@ func MakePayment(c *gin.Context) {
 	invoice_model.CreatePayment(&payment)
 	response.SendSuccess(c, payment)
 }
+
+func PaymentList(c *gin.Context) {
+	iId := c.DefaultQuery("iid", "")
+	if iId == "" {
+		response.SendError(c, errorcode.CODE_PARAMS_INVALID, "missing params", nil)
+		return
+	}
+	invoice := invoice_model.GetInvoice(util.StrToUInt(iId))
+	if invoice == nil {
+		response.SendError(c, errorcode.CODE_PARAMS_INVALID, "invalid invoice", nil)
+		return
+	}
+	list, count := invoice_model.GetPaymentByIId(invoice.IID)
+	response.SendSuccess(c, map[string]interface{}{"count": count, "list": list})
+}
