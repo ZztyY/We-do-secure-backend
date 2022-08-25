@@ -84,6 +84,10 @@ func ResetPassword(c *gin.Context) {
 		return
 	}
 	user := user_model.GetUser(util.StrToUInt(userId))
+	if password == user.Password {
+		response.SendError(c, errorcode.CODE_USER_PASSWORD_FORMAT, "password can not be same as before!", nil)
+		return
+	}
 	user.Password = password
 	user_model.UpdateUser(user)
 	response.SendSuccess(c, "success")
