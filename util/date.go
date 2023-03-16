@@ -14,6 +14,8 @@ type JSONDetailTime struct {
 	time.Time
 }
 
+// test push
+
 func (t JSONTime) MarshalJSON() ([]byte, error) {
 	var zeroTime time.Time
 	if t.Time.UnixNano() == zeroTime.UnixNano() {
